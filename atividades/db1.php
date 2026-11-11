@@ -1,4 +1,45 @@
 <?php
+    require_once "conexao.php";
+
+    //1. CRIAR TABELA
+    $sql = "CREATE TABLE IF NOT EXISTS produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL (10,2) NOT NULL
+    quantidade INT NOT NULL)";
+
+    $pdo->exec($sql);
+
+    //2. CADASTRAR PRODUTO
+    if (isset($_POST["cadastrar"])) 
+    {
+        $nome = "nome";
+        $preco = "preco";
+        $quantidade = "quantidade";
+
+        $sql - "INSERT INTO produtos(nome, preco, quantidade) 
+        VALUES ($nome, $preco, $quantidade)";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([
+            "nome" => $nome,
+            "preco" => $preco,
+            "quantidade" => $quantidade
+        ]);
+    }
+
+    //3. ATUALIZAR PRODUTO
+    if (isset($_POST["atualizar"]))
+    {
+        $id = ,
+        $nome = ,
+        $preco = ,
+        $quantidade = ,
+
+        $sql = "UPDATE produtos "
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +94,7 @@
 
         <h2>Produtos Cadastrados: </h2>
         <table>
-            
+
             <tr> <!-- tr | TABLE ROW | Cria uma linha dentro da tabela -->
                 <th>ID</th> <!-- th | TABLE ROW | Cria uma céluçla de cabeçalho na tabela -->
                 <th>Nome<th>
