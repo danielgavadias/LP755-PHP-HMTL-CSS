@@ -20,7 +20,9 @@ echo "\n\nDEBUG 1.5\n\n";
 //
 //
 
-    $pdo->exec($sql);
+$stmt = $pdo->prepare($sql);
+
+$stmt->execute();
 
 //
 //
