@@ -32,12 +32,22 @@
     //3. ATUALIZAR PRODUTO
     if (isset($_POST["atualizar"]))
     {
-        $id = ,
-        $nome = ,
-        $preco = ,
-        $quantidade = ,
+        $id = $_POST["id"],
+        $nome =  $_POST["nome"],
+        $preco =  $_POST["preco"],
+        $quantidade =  $_POST["quantidade"],
 
-        $sql = "UPDATE produtos "
+        $sql = "UPDATE produtos SET nome = '$nome', preco = $preco, quantidade = '$quantidade WHERE id = $id";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([
+            "nome" => $nome,
+            "preco" => $preco,
+            "quantidade" => $quantidade,
+            "id" => $id
+        ]);
+
     }
 
 ?>
