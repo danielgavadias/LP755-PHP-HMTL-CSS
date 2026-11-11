@@ -6,7 +6,7 @@
 
     // host =  localhost = 194.61.238.119
     $host = 'localhost';
-    $db = 'daniel755';
+    $db = 'daniel755_db1';
     $user = 'daniel755';
     $pass = '755!@#';
     $charset = 'utf8mb4';
