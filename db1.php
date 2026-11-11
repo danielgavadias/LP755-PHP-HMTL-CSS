@@ -1,6 +1,12 @@
 <?php
     require_once "conexao.php";
 
+//
+//
+echo "DEBUG 1";
+//
+//
+
     //1. CRIAR TABELA
     $sql = "CREATE TABLE IF NOT EXISTS produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -10,6 +16,12 @@
 
     $pdo->exec($sql);
 
+//
+//
+echo "DEBUG 2";
+//
+//
+ 
     //2. CADASTRAR PRODUTO
     if (isset($_POST["cadastrar"])) 
     {
@@ -29,6 +41,12 @@
         ]);
     }
 
+//
+//
+echo "DEBUG 3";
+//
+//
+ 
     //3. ATUALIZAR PRODUTO
     if (isset($_POST["atualizar"]))
     {
@@ -49,6 +67,12 @@
         ]);
     }
 
+//
+//
+echo "DEBUG 4";
+//
+//
+ 
     //4. EXCLUIR PRODUTO
     if (isset($_POST["excluir"]))
     {
@@ -59,6 +83,12 @@
         ]);
     }
 
+//
+//
+echo "DEBUG 5";
+//
+//
+ 
     //5. BUSCAR PRODUTO PARA EDIÇÃO
     $produtoEditar = NULL;
 
@@ -71,11 +101,23 @@
         $produtoEditar = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+//
+//
+echo "DEBUG 6";
+//
+//
+ 
     //6. LISTAR TODOS OS PRODUTOS
     $sql = "SELECT * FROM produtos ORDER BY id ASC";
     $stmt = $pdo->query($sql);
     $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+//
+//
+echo "DEBUG 7";
+//
+//
+ 
 ?>
 
 <!DOCTYPE html>
