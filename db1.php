@@ -3,7 +3,7 @@
 
 //
 //
-echo "DEBUG 1";
+echo "\n\nDEBUG 1\n\n";
 //
 //
 
@@ -13,6 +13,12 @@ echo "DEBUG 1";
     nome VARCHAR(100) NOT NULL,
     preco DECIMAL (10,2) NOT NULL
     quantidade INT NOT NULL)";
+
+//
+//
+echo "\n\nDEBUG 1.5\n\n";
+//
+//
 
     $pdo->exec($sql);
 
