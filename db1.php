@@ -32,10 +32,10 @@
     //3. ATUALIZAR PRODUTO
     if (isset($_POST["atualizar"]))
     {
-        $id = $_POST["id"],
-        $nome =  $_POST["nome"],
-        $preco =  $_POST["preco"],
-        $quantidade =  $_POST["quantidade"],
+        $id = $_POST["id"];
+        $nome =  $_POST["nome"];
+        $preco =  $_POST["preco"];
+        $quantidade =  $_POST["quantidade"];
 
         $sql = "UPDATE produtos SET nome = '$nome', preco = $preco, quantidade = '$quantidade WHERE id = $id";
 
@@ -52,9 +52,9 @@
     //4. EXCLUIR PRODUTO
     if (isset($_POST["excluir"]))
     {
-        $id = $_POST["id"],
+        $id = $_POST["id"];
         $sql = "DELETE FROM produtos WHERE id = $id";
-        $stmt = execute([
+        $stmt->execute([
             "id" => $id
         ]);
     }
