@@ -3,43 +3,34 @@
 require_once "conexao.php";
 
     //TABELA CATEGORIAS
-    $sql = "CREATE TABLE IF NOT EXISTS categorias 
+    $sqlCATEGORIAS = "CREATE TABLE IF NOT EXISTS categorias 
     (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
     )";
     
     //TABELA PRODUTOS
-    $sql = "CREATE TABLE IF NOT EXISTS produtos 
+    $sqlPRODUTOS = "CREATE TABLE IF NOT EXISTS produtos 
     (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
-    categoria_id INT, FOREIGN KEY
-    FOREIGN KEY (categoria) REFERENCES categorias(id) 
-    preco DECIMAL (10,2) NOT NULL,
-    qtd INT NOT NULL
-    estoque_minino INT NOT NULL
+    categoria_id INT,
+    FOREIGN KEY (categorias) REFERENCES categorias(id),
+    preco DECIMAL (10,2) NOT NULL CHECK (valor_total >= 0),
+    qtd  INT NOT NULL CHECK (valor_total >= 0),
+    estoque_minimo INT NOT NULL CHECK (valor_total >= 0)
     )";
 
     //TABELA VENDAS
-    $sql = "CREATE TABLE IF NOT EXISTS produtos 
+    $sqlVENDAS = "CREATE TABLE IF NOT EXISTS vendas 
     (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     produto_id INT,
-    FOREIGN KEY (produto_id) REFERENCES produtos(id) 
-    
-    valor_total DECIMAL (10,2) NOT NULL ,
-    if ($valor_total < 0) {
-    $valor_total = 0;
-    },
-    
-    qtd INT NOT NULL,
-    if ($qtd < 0) {
-    $qtd = 0;
-    },
-
-    data_venda DATETIME, NOT NULL
+    FOREIGN KEY (produto_id) REFERENCES produtos(id),
+    valor_total DECIMAL (10,2) NOT NULL CHECK (valor_total >= 0),
+    qtd INT NOT NULL CHECK (qtd >= 0),
+    data_venda DATETIME NOT NULL
     )";
 
     $stmt = $pdo->prepare($sql);
