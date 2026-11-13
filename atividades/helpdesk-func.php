@@ -1,7 +1,0 @@
-
-<?php
-function create()
-{
-
-return
-}
