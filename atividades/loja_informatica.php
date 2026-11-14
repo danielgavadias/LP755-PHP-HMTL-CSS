@@ -15,10 +15,10 @@ require_once "conexao.php";
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
     categoria_id INT,
-    FOREIGN KEY (categorias) REFERENCES categorias(id),
-    preco DECIMAL (10,2) NOT NULL CHECK (valor_total >= 0),
-    qtd  INT NOT NULL CHECK (valor_total >= 0),
-    estoque_minimo INT NOT NULL CHECK (valor_total >= 0)
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id),
+    preco DECIMAL (10,2) NOT NULL CHECK (preco >= 0),
+    qtd  INT NOT NULL CHECK (qtd >= 0),
+    estoque_minimo INT NOT NULL CHECK (estoque_minimo >= 0)
     )";
 
     //TABELA VENDAS
@@ -45,9 +45,6 @@ require_once "conexao.php";
         $qtd = $_POST["qtd"];
         $estoque_min = $_POST["estoque_min"];
 
-        $sql = "INSERT INTO produtos(nome, categoria_id, preco, qtd, estoque_min) 
-        VALUES ($nome, $categoria_id, $preco, $qtd, $estoque_min)";
-
         $stmt = $pdo->prepare($sql);
 
         $stmt->execute([
@@ -70,28 +67,52 @@ require_once "conexao.php";
 </head>
 <body>
 
+    <h1>LOJA: INFORMÁTICA</h1>
 
+    <p>Desejas: </p>
+    
+    <form method="POST">
+        
+        <button type="submit" name="cadastrar" value="1"> Cadastrar produtos </button>
+            <?php if (isset($_POST["cadastrar"])) { ?>
 
+            <p>Insira o nome: </p> <input type="text" name="nome" required>
+            <p>Insira a categoria(id): </p> <input type="number" name="categoria_id" min="0" step="1" required>
+            <p>Insira o preco: </p> <input type="number" name="preco" min="0" step="0.01" required>
+            <p>Insira a quantidade: </p> <input type="number" name="qtd" min="0" step="1" required>
+            <p>Insira o valor minimo de estoque: </p><input type="number" name="estoque_min" min="0" step="1" required>
 
+            <button type="submit" name="fazer_cadastro">Fazer cadastro.</button>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <?php } ?>
 
 
     
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </form>
 </body>
 </html>
