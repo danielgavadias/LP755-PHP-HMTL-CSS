@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . "/../conexao.php";
-die("CONEXÃO REALIZADA. PHP FUNCIONANDO.");
 
     //CRIA TABELA CATEGORIAS
     $sqlCATEGORIAS = "CREATE TABLE IF NOT EXISTS categorias 
@@ -39,7 +38,6 @@ die("CONEXÃO REALIZADA. PHP FUNCIONANDO.");
     (nome, categoria_id, preco, qtd, estoque_minimo)
     VALUES (?, ?, ?, ?, ?)";
 
-try {
     $stmt = $pdo->prepare($sqlCATEGORIAS);
     $stmt->execute();
 
@@ -48,12 +46,6 @@ try {
 
     $stmt = $pdo->prepare($sqlVENDAS);
     $stmt->execute();
-
-} catch (PDOException $e) {
-    die("ERRO SQL: " . $e->getMessage());
-}
-
-
 
     // CADASTRAR PRODUTOS:
     if (isset($_POST["fazer_cadastro"])) 
