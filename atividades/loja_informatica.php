@@ -1,6 +1,6 @@
 <?php
 
-require_once "conexao.php";
+require_once __DIR__ . "/../conexao.php";
 die("CONEXÃO REALIZADA. PHP FUNCIONANDO.");
 
     //CRIA TABELA CATEGORIAS
