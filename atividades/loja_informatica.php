@@ -38,6 +38,7 @@ require_once "conexao.php";
     (nome, categoria_id, preco, qtd, estoque_minimo)
     VALUES (?, ?, ?, ?, ?)";
 
+try {
     $stmt = $pdo->prepare($sqlCATEGORIAS);
     $stmt->execute();
 
@@ -46,6 +47,10 @@ require_once "conexao.php";
 
     $stmt = $pdo->prepare($sqlVENDAS);
     $stmt->execute();
+
+} catch (PDOException $e) {
+    die("ERRO SQL: " . $e->getMessage());
+}
 
 
 
