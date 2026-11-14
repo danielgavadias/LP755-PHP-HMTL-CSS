@@ -2,14 +2,14 @@
 
 require_once "conexao.php";
 
-    //TABELA CATEGORIAS
+    //CRIA TABELA CATEGORIAS
     $sqlCATEGORIAS = "CREATE TABLE IF NOT EXISTS categorias 
     (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
     )";
     
-    //TABELA PRODUTOS
+    //CRIA TABELA PRODUTOS
     $sqlPRODUTOS = "CREATE TABLE IF NOT EXISTS produtos 
     (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -21,7 +21,7 @@ require_once "conexao.php";
     estoque_minimo INT NOT NULL CHECK (estoque_minimo >= 0)
     )";
 
-    //TABELA VENDAS
+    //CRIA TABELA VENDAS
     $sqlVENDAS = "CREATE TABLE IF NOT EXISTS vendas 
     (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,11 +33,24 @@ require_once "conexao.php";
     data_venda DATETIME NOT NULL
     )";
 
-    $stmt = $pdo->prepare($sql);
+    //ARMAZENA DADOS
+    $sqlCADASTRO = "INSERT INTO produtos 
+    (nome, categoria_id, preco, qtd, estoque_minimo)
+    VALUES (?, ?, ?, ?, ?)";
+
+    $stmt = $pdo->prepare($sqlCATEGORIAS);
     $stmt->execute();
 
+    $stmt = $pdo->prepare($sqlPRODUTOS);
+    $stmt->execute();
+
+    $stmt = $pdo->prepare($sqlVENDAS);
+    $stmt->execute();
+
+
+
     // CADASTRAR PRODUTOS:
-    if (isset($_POST["cadastrar"])) 
+    if (isset($_POST["fazer_cadastro"])) 
     {
         $nome = $_POST["nome"];
         $categoria_id = $_POST["categoria_id"];
@@ -45,7 +58,7 @@ require_once "conexao.php";
         $qtd = $_POST["qtd"];
         $estoque_min = $_POST["estoque_min"];
 
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare($sqlCADASTRO);
 
         $stmt->execute([
             $nome,
