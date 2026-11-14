@@ -209,7 +209,7 @@
                         <span>SQL</span>
                         <span>PHP</span>
                     </div>
-                    <a href="atividades/loja_informatica.php">Ver projetos</a>
+                    <a href="C:\Users\Aluno\Desktop\LP755-PHP-HMTL-CSS\atividades\loja_informatica.php">Ver projetos</a>
                 </div>
            </div>
         </section>
