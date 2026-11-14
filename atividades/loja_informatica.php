@@ -1,6 +1,7 @@
 <?php
 
 require_once "conexao.php";
+die("CONEXÃO REALIZADA. PHP FUNCIONANDO.");
 
     //CRIA TABELA CATEGORIAS
     $sqlCATEGORIAS = "CREATE TABLE IF NOT EXISTS categorias 
