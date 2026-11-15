@@ -37,11 +37,6 @@ require_once __DIR__ . "/../../conexao.php";
     data_venda DATETIME NOT NULL
     )";
 
-    //ARMAZENA DADOS
-    $sqlCADASTRO = "INSERT INTO produtos 
-    (nome, categoria_id, preco, qtd, estoque_min)
-    VALUES (?, ?, ?, ?, ?)";
-
     $stmt = $pdo->prepare($sqlCATEGORIAS);
     $stmt->execute();
 
@@ -50,26 +45,6 @@ require_once __DIR__ . "/../../conexao.php";
 
     $stmt = $pdo->prepare($sqlVENDAS);
     $stmt->execute();
-
-    // CADASTRAR PRODUTOS:
-    if (isset($_POST["fazer_cadastro"])) 
-    {
-        $nome = $_POST["nome"];
-        $categoria_id = $_POST["categoria_id"];
-        $preco = $_POST["preco"];
-        $qtd = $_POST["qtd"];
-        $estoque_min = $_POST["estoque_min"];
-
-        $stmt = $pdo->prepare($sqlCADASTRO);
-
-        $stmt->execute([
-            $nome,
-            $categoria_id,
-            $preco,
-            $qtd,
-            $estoque_min
-        ]);
-    }
 
 ?>
 
@@ -85,7 +60,7 @@ require_once __DIR__ . "/../../conexao.php";
     <h1>LOJA: INFORMÁTICA</h1>
 
     <?php /*if(isset($_POST["produtos"])){*/
-    foreach($_POST["produtos"] as $produto) { ?>
+    foreach($produtos as $produto) { ?>
      
     <p><strong class="ProdutoID">Produto <?= $produto["id"];?></strong>: 
     nome: <?= $produto["nome"];?>
@@ -110,4 +85,9 @@ require_once __DIR__ . "/../../conexao.php";
     
     <form method="POST">   
         <a href="cadastro_loja_info.php"> CADASTRAR UM NOVO PRODUTO</a>
- 
+        <!-- opções pra dps* <a href=".php" name=".">.</a> -->
+    </form>
+    
+    
+</body>
+</html>
