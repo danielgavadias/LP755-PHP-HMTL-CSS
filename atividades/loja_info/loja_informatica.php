@@ -2,6 +2,10 @@
 
 require_once __DIR__ . "/../../conexao.php";
 
+    $stmt = $pdo->query("SELECT * FROM produtos");
+    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
     //CRIA TABELA CATEGORIAS
     $sqlCATEGORIAS = "CREATE TABLE IF NOT EXISTS categorias 
     (
@@ -67,9 +71,6 @@ require_once __DIR__ . "/../../conexao.php";
         ]);
     }
 
-    $stmt = $pdo->query("SELECT * FROM produtos");
-    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +84,7 @@ require_once __DIR__ . "/../../conexao.php";
 
     <h1>LOJA: INFORMÁTICA</h1>
 
-    <?php if(isset($_POST["produtos"])){
+    <?php /*if(isset($_POST["produtos"])){*/
     foreach($_POST["produtos"] as $produto) { ?>
      
     <p><strong class="ProdutoID">Produto <?= $produto["id"];?></strong>: 
@@ -104,14 +105,9 @@ require_once __DIR__ . "/../../conexao.php";
 
     </p>
     
-    <?php }} ?>
+    <?php }/*}*/ ?>
     <p>Desejas: </p>
     
     <form method="POST">   
         <a href="cadastro_loja_info.php"> CADASTRAR UM NOVO PRODUTO</a>
-        <!-- opções pra dps* <a href=".php" name=".">.</a> -->
-    </form>
-    
-    
-</body>
-</html>
+ 
