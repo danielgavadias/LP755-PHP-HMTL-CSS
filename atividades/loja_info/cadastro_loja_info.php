@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__ . "/../../conexao.php";
+   
    //ARMAZENA DADOS
     $sqlCADASTRO = "INSERT INTO produtos 
     (nome, categoria_id, preco, qtd, estoque_min)
