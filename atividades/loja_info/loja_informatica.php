@@ -67,6 +67,9 @@ require_once __DIR__ . "/../../conexao.php";
         ]);
     }
 
+    $stmt = $pdo->query("SELECT * FROM produtos");
+    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -99,8 +102,6 @@ require_once __DIR__ . "/../../conexao.php";
         <strong class="estoqueDisponivel">ESTOQUE DISPONÍVEL</strong> 
     <?php } ?>
 
-
-    ?>
     </p>
     
     <?php }} ?>
