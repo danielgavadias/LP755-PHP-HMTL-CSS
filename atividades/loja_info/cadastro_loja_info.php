@@ -12,7 +12,7 @@
         <p>Insira o nome: </p> <input type="text" name="nome" required>
         <p>Insira o preco: </p> <input type="number" name="preco" min="0" step="0.01" required>
         <p>Insira a quantidade: </p> <input type="number" name="qtd" min="0" step="1" required>
-        <p>Insira o valor minimo de estoque: </p><input type="number" name="estoque_min" min="0" step="1" required>
+        <p>Insira a quantidade minima de estoque: </p><input type="number" name="estoque_min" min="0" step="1" required>
 
     <button type="submit" name="fazer_cadastro">Fazer cadastro.</button>
 </form>

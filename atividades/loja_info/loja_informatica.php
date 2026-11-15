@@ -80,6 +80,17 @@ require_once __DIR__ . "/../../conexao.php";
 
     <h1>LOJA: INFORMÁTICA</h1>
 
+    <?php if(isset($_POST["produtos"])){
+    foreach($_POST["produtos"] as $produto) { ?>
+     
+    <p><strong class="ProdutoID">Produto <?= $produto["id"];?></strong>: 
+    nome: <?= $produto["nome"];?>
+    preço: <?= $produto["preco"];?>
+    Quantidade no estoque: <?= $produto["qtd"];?>
+    Quantidade minima permitida no estoque: <?= $produto["estoque_min"];?>
+    </p>
+    
+    <?php }} ?>
     <p>Desejas: </p>
     
     <form method="POST">   
@@ -87,6 +98,6 @@ require_once __DIR__ . "/../../conexao.php";
         <!-- opções pra dps* <a href=".php" name=".">.</a> -->
     </form>
     
-
+    
 </body>
 </html>
