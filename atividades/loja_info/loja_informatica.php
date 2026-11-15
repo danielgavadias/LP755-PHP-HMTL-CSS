@@ -88,6 +88,19 @@ require_once __DIR__ . "/../../conexao.php";
     preço: <?= $produto["preco"];?>
     Quantidade no estoque: <?= $produto["qtd"];?>
     Quantidade minima permitida no estoque: <?= $produto["estoque_min"];?>
+    Situação do estoque: 
+    <?php if ($produto["qtd"] == 0) { ?>
+        <strong class="estoqueZero">ESGOTADO</strong> 
+    
+    <?php } elseif ($produto["qtd"] <= $produto["estoque_min"]){ ?>
+        <strong class="estoqueBaixo">ESTOQUE BAIXO</strong> 
+ 
+    <?php }else{ ?>
+        <strong class="estoqueDisponivel">ESTOQUE DISPONÍVEL</strong> 
+    <?php } ?>
+
+
+    ?>
     </p>
     
     <?php }} ?>
