@@ -82,37 +82,11 @@ require_once __DIR__ . "/../conexao.php";
 
     <p>Desejas: </p>
     
-    <form method="POST">
-        
-        <button type="submit" name="cadastrar" value="1"> Cadastrar produtos </button>
-
-
+    <form method="POST">   
+        <a href="cadastro_loja_info.php"> CADASTRAR UM NOVO PRODUTO</a>
+        <!-- opções pra dps* <a href=".php" name=".">.</a> -->
+    </form>
     
 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </form>
 </body>
 </html>
