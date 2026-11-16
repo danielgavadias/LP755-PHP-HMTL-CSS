@@ -78,7 +78,14 @@ require_once __DIR__ . "/../../conexao.php";
     </p>  
         
 <form method="POST"> 
-    <button type="submit" name="excluir" value="<?= $produto['id']?>">Excluir Produto<?= $produto["id"];?></button>
+    <button 
+        type="submit" 
+        name="excluir" 
+        value="<?= $produto['id']?>" 
+        onclick="return confirm('Tens certeza que queres excluir este produto?')">
+            Excluir Produto<?= $produto["id"];?>
+        </button>
+    
     <?php if(isset($_POST["excluir"]))
     { 
         $idExcluir = $_POST["excluir"];
