@@ -2,10 +2,6 @@
 
 require_once __DIR__ . "/../../conexao.php";
 
-    $stmt = $pdo->query("SELECT * FROM produtos");
-    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
     //CRIA TABELA CATEGORIAS
     $sqlCATEGORIAS = "CREATE TABLE IF NOT EXISTS categorias 
     (
@@ -36,6 +32,9 @@ require_once __DIR__ . "/../../conexao.php";
     qtd INT NOT NULL CHECK (qtd >= 0),
     data_venda DATETIME NOT NULL
     )";
+
+    $stmt = $pdo->query("SELECT * FROM produtos");
+    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $stmt = $pdo->prepare($sqlCATEGORIAS);
     $stmt->execute();
