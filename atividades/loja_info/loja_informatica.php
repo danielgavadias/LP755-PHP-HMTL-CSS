@@ -33,9 +33,6 @@ require_once __DIR__ . "/../../conexao.php";
     data_venda DATETIME NOT NULL
     )";
 
-    $stmt = $pdo->query("SELECT * FROM produtos");
-    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     $stmt = $pdo->prepare($sqlCATEGORIAS);
     $stmt->execute();
 
@@ -44,6 +41,9 @@ require_once __DIR__ . "/../../conexao.php";
 
     $stmt = $pdo->prepare($sqlVENDAS);
     $stmt->execute();
+
+    $stmt = $pdo->query("SELECT * FROM produtos");
+    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
