@@ -61,7 +61,7 @@ require_once __DIR__ . "/../../conexao.php";
     <?php /*if(isset($_POST["produtos"])){*/
     foreach($produtos as $produto) { ?>
      
-    <p><br><strong class="ProdutoID">Produto <?= $produto["id"];?></strong>:<br> 
+    <p><strong class="ProdutoID">Produto <?= $produto["id"];?></strong>:<br> 
     nome: <?= $produto["nome"];?>
     preço: <?= $produto["preco"];?>
     Quantidade no estoque: <?= $produto["qtd"];?>
