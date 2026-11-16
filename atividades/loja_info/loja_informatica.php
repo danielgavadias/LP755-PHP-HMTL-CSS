@@ -22,16 +22,16 @@ require_once __DIR__ . "/../../conexao.php";
     )";
 
     //CRIA TABELA VENDAS
-    $sqlVENDAS = "CREATE TABLE IF NOT EXISTS vendas 
-    (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    produto_id INT,
-    FOREIGN KEY (produto_id) REFERENCES produtos(id),
-    valor_total DECIMAL (10,2) NOT NULL CHECK (valor_total >= 0),
-    qtd INT NOT NULL CHECK (qtd >= 0),
-    data_venda DATETIME NOT NULL
-    )";
+    // $sqlVENDAS = "CREATE TABLE IF NOT EXISTS vendas 
+    // (
+    // id INT AUTO_INCREMENT PRIMARY KEY,
+    // nome VARCHAR(100) NOT NULL,
+    // produto_id INT,
+    // FOREIGN KEY (produto_id) REFERENCES produtos(id),
+    // valor_total DECIMAL (10,2) NOT NULL CHECK (valor_total >= 0),
+    // qtd INT NOT NULL CHECK (qtd >= 0),
+    // data_venda DATETIME NOT NULL
+    // )";
 
     $stmt = $pdo->prepare($sqlCATEGORIAS);
     $stmt->execute();
@@ -39,8 +39,8 @@ require_once __DIR__ . "/../../conexao.php";
     $stmt = $pdo->prepare($sqlPRODUTOS);
     $stmt->execute();
 
-    $stmt = $pdo->prepare($sqlVENDAS);
-    $stmt->execute();
+    // $stmt = $pdo->prepare($sqlVENDAS);
+    // $stmt->execute();
 
     $stmt = $pdo->query("SELECT * FROM produtos");
     $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -94,6 +94,33 @@ require_once __DIR__ . "/../../conexao.php";
         $stmt = $pdo->prepare("DELETE FROM produtos WHERE id = ?");
         //dá a informação e pede a execução do comando
         $stmt->execute([$idExcluir]);
+
+        // Busca os IDs existentes, do menor para o maior
+        $ids = $pdo->query("SELECT id FROM produtos ORDER BY id")->fetchAll(PDO::FETCH_COLUMN);
+
+        // Descobre o maior ID
+        $maiorId = 0;
+        $maiorId = max($ids);
+
+        // Muda temporariamente os IDs
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
+        $pdo->exec("UPDATE produtos SET id = id + $maiorId");
+
+        // Busca os IDs temporários, mantendo a ordem
+        $idsTemporarios = $pdo->query("SELECT id FROM produtos ORDER BY id")->fetchAll(PDO::FETCH_COLUMN);
+        
+        // Troca os IDs temporários por números seguidos
+        $novoId = 1;
+        foreach ($idsTemporarios as $idTemporario) 
+        {
+            $stmt = $pdo->prepare("UPDATE produtos SET id = ? WHERE id = ?");
+            $stmt->execute([$novoId, $idTemporario]);
+            $novoId++;
+             // Deixa o próximo cadastro continuar a numeração
+            $pdo->exec("ALTER TABLE produtos AUTO_INCREMENT = 1");
+            $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+        }
+        
         }
     } ?>
 </form>
