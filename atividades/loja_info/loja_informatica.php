@@ -66,18 +66,31 @@ require_once __DIR__ . "/../../conexao.php";
     preço: <?= $produto["preco"];?>
     Quantidade no estoque: <?= $produto["qtd"];?>
     Quantidade minima permitida no estoque: <?= $produto["estoque_min"];?>
+    
     Situação do estoque: 
     <?php if ($produto["qtd"] == 0) { ?>
         <strong class="estoqueZero">ESGOTADO</strong>  
     <?php } elseif ($produto["qtd"] <= $produto["estoque_min"]){ ?>
         <strong class="estoqueBaixo">ESTOQUE BAIXO</strong> 
-    <?php }else{ ?>
+    <?php } else{ ?>
         <strong class="estoqueDisponivel">ESTOQUE DISPONÍVEL</strong> 
     <?php } ?>
+    </p>  
+        
+<form method="POST"> 
+    <button type="submit" name="excluir" value="<?= $produto['id']?>">Excluir Produto<?= $produto["id"];?></button>
+    <?php if(isset($_POST["excluir"]))
+    { 
+        $idExcluir = $_POST["excluir"];
 
-    </p>
-    
-    <?php }/*}*/ ?>
+        //prepara o comando
+        $stmt = $pdo->prepare("DELETE FROM produtos WHERE id = ?");
+        //dá a informação e pede a execução do comando
+        $stmt->execute([$idExcluir]);
+        }
+    } ?>
+</form>
+
     <p>Desejas: </p>
     
     <form method="POST">   
