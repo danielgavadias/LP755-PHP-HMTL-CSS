@@ -7,9 +7,7 @@ $host = '194.61.238.119';
 $banco = 'daniel755_db1';     // $db = 'daniel755_db1';
 $usuario = 'daniel755';   // $user = 'daniel755';
 $senha = '755!@#';     // $pass = '755!@#';
-$host = 'localhost';
-   
-    
+$host = 'localhost';  
     
     // $charset = 'utf8mb4';
 try {
