@@ -192,7 +192,6 @@
                 <p>Vamos conversar!</p>
                 <h2>Contato</h2>
             </div>
-            <div class="contato-links">
 <!--==================================================================================================================================== -->
                 <!-- PROJETO 6-->
         <div class="card">
@@ -218,8 +217,35 @@
                 <p>Vamos conversar!</p>
                 <h2>Contato</h2>
             </div>
-            <div class="contato-links">
+
 <!--==================================================================================================================================== -->
+                <!-- PROJETO 7-->
+        <div class="card">
+                    
+                    <div class="numero-projeto">
+                        07
+                    </div>
+                   
+                    <h3>php inseguro</h3>
+                    <p>(PHP + HTML + SGBD/SQL)</p>
+
+                    <div class="tecnologias">
+                        <span>HTML</span>
+                        <span>SQL</span>
+                        <span>PHP</span>
+                    </div>
+                    <a href="atividades/atividade_php_inseguro/vulnerabilidades.php">Ver projetos</a>
+                </div>
+           </div>
+        </section>
+<section id="contato" class="contato">
+            <div class="titulo-secao">
+                <p>Vamos conversar!</p>
+                <h2>Contato</h2>
+        </div>
+<!--====================================================================================================================================-->
+            <div class="contato-links">
+
                 <a href="mailto:daniel.gava0903@gmail.com">Email</a>
                 <a href="https://github.com/danielgavadias"> Github</a>
 
