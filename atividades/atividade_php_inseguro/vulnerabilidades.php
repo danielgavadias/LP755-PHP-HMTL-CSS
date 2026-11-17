@@ -133,31 +133,43 @@ $total = $pdo->query('SELECT COUNT(*) FROM produtos')->fetchColumn();
         <section class="painel">
 
             <h2><?= $editar ? 'Editar produto' : 'Cadastrar produto' ?></h2>
+
             <form method="post" class="grade">
+
                 <input type="hidden" name="acao" value="<?= $editar ? 'atualizar' : 'cadastrar' ?>">
                 <?php if ($editar): ?><input type="hidden" name="id" value="<?= $editar['id'] ?>"><?php endif; ?>
-                <label>Nome <input name="nome" value="<?= $editar['nome'] ?? '' ?>"></label>
-                <label>Categoria <input name="categoria" value="<?= $editar['categoria'] ?? '' ?>"></label>
-                <label>Preço (R$) <input name="preco" value="<?= $editar['preco'] ?? '' ?>"></label>
-                <label>Estoque <input name="estoque" value="<?= $editar['estoque'] ?? '' ?>"></label>
-                <label class="largura">Descrição <textarea name="descricao"><?= $editar['descricao'] ?? '' ?></textarea></label>
-                <div><button><?= $editar ? 'Salvar alterações' : 'Cadastrar' ?></button> <a href="index.php">Limpar</a></div>
-            </form>
-            
+                    
+                    <label>Nome <input name="nome" value="<?= $editar['nome'] ?? '' ?>"></label>
+                    <label>Categoria <input name="categoria" value="<?= $editar['categoria'] ?? '' ?>"></label>
+                    <label>Preço (R$) <input name="preco" value="<?= $editar['preco'] ?? '' ?>"></label>
+                    <label>Estoque <input name="estoque" value="<?= $editar['estoque'] ?? '' ?>"></label>
+                    <label class="largura">Descrição <textarea name="descricao"><?= $editar['descricao'] ?? '' ?></textarea></label>
+
+                    <div>    
+                        <button><?= $editar ? 'Salvar alterações' : 'Cadastrar' ?></button> 
+                        <a href="index.php">Limpar</a>
+                    </div>
+            </form>    
         </section>
+
         <section class="painel">
+
             <h2>Produtos cadastrados (<?= $total ?>)</h2>
+
             <form method="get" class="filtros">
                 <input name="busca" placeholder="Buscar nome ou descrição" value="<?= $busca ?>">
                 <input name="categoria" placeholder="Filtrar categoria" value="<?= $categoriaFiltro ?>">
                 <select name="ordem">
+                    
                     <option value="id">Código</option>
                     <option value="nome">Nome</option>
                     <option value="preco">Preço</option>
                     <option value="<?= $ordem ?>" selected>Ordenação atual</option>
+
                 </select>
                 <button>Pesquisar</button>
             </form>
+
             <div class="tabela">
                 <table>
                     <thead>
@@ -172,6 +184,7 @@ $total = $pdo->query('SELECT COUNT(*) FROM produtos')->fetchColumn();
                         </tr>
                     </thead>
                     <tbody>
+
                         <?php foreach ($produtos as $produto): ?>
                             <tr>
                                 <td><?= $produto['id'] ?></td>
@@ -180,17 +193,21 @@ $total = $pdo->query('SELECT COUNT(*) FROM produtos')->fetchColumn();
                                 <td><?= $produto['categoria'] ?></td>
                                 <td>R$ <?= $produto['preco'] ?></td>
                                 <td><?= $produto['estoque'] ?></td>
-                                <td><a href="?editar=<?= $produto['id'] ?>">Editar</a> <a href="?acao=excluir&id=<?= $produto['id'] ?>">Excluir</a></td>
+                                <td><a href="?editar=<?= $produto['id'] ?>">Editar</a> 
+                                <a href="?acao=excluir&id=<?= $produto['id'] ?>">Excluir</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </section>
+
         <section class="painel">
+
             <h2>Observações da loja</h2>
             <p>Esta página foi criada para a turma identificar problemas reais de desenvolvimento web.</p>
             <p>Mensagem de campanha: <?= $_GET['campanha'] ?? 'Nenhuma campanha ativa' ?></p>
+            
         </section>
     </main>
     <footer>Estoque Fácil • Ambiente de laboratório</footer>
