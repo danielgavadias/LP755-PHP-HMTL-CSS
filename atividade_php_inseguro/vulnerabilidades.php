@@ -8,8 +8,10 @@ $banco = 'daniel755_db1';     // $db = 'daniel755_db1';
 $usuario = 'daniel755';   // $user = 'daniel755';
 $senha = '755!@#';     // $pass = '755!@#';
 $host = 'localhost';
-$charset = 'utf8mb4';
-
+   
+    
+    
+    // $charset = 'utf8mb4';
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$banco;charset=utf8mb4", $usuario, $senha);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
