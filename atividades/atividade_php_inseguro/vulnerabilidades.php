@@ -3,7 +3,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
-$host = '127.0.0.1';
+$host = '194.61.238.119';
 $banco = 'daniel755_db1';     // $db = 'daniel755_db1';
 $usuario = 'daniel755';   // $user = 'daniel755';
 $senha = '755!@#';     // $pass = '755!@#';
