@@ -3,11 +3,15 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
-$host = '127.0.0.1';
-$banco = 'xxxxxxx';
-$usuario = 'xxxxxxx';
-$senha = 'xxxxxxx';
-
+// $host = '127.0.0.1';
+$banco = 'daniel755_db1';     // $db = 'daniel755_db1';
+$usuario = 'daniel755';   // $user = 'daniel755';
+$senha = '755!@#';     // $pass = '755!@#';
+$host = 'localhost';
+   
+    
+    
+    // $charset = 'utf8mb4';
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$banco;charset=utf8mb4", $usuario, $senha);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -207,7 +211,7 @@ $total = $pdo->query('SELECT COUNT(*) FROM produtos')->fetchColumn();
             <h2>Observações da loja</h2>
             <p>Esta página foi criada para a turma identificar problemas reais de desenvolvimento web.</p>
             <p>Mensagem de campanha: <?= $_GET['campanha'] ?? 'Nenhuma campanha ativa' ?></p>
-            
+
         </section>
     </main>
     <footer>Estoque Fácil • Ambiente de laboratório</footer>

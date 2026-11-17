@@ -4,7 +4,7 @@
     //MySQL: SGBD
     //PDO: Intrerface dp PHP que permite conversar com o banco de dados
 
-    // host =  localhost = 194.61.238.119
+    // host = localhost = 194.61.238.119
     $host = 'localhost';
     $db = 'daniel755_db1';
     $user = 'daniel755';
