@@ -25,7 +25,7 @@ if ($acao === 'login') {
     $password = $_POST['senha'] ?? '';
     $sql = "SELECT * FROM usuarios WHERE email = ':email' AND senha = ':password'";
     $stmt = $pdo->prepare($sql);
-    // $stmt->execute(['email'=> $email, 'password' => $password]);
+    $stmt->execute(['email'=> $email, 'password' => $password]);
 
     $encontrado = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     if ($encontrado) {
