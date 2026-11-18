@@ -23,7 +23,10 @@ $acao = $_POST['acao'] ?? $_GET['acao'] ?? '';
 if ($acao === 'login') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['senha'] ?? '';
-    $sql = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$password'";
+    $sql = "SELECT * FROM usuarios WHERE email = ':email' AND senha = ':password'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['email'=> $email, 'password' => $password]);
+
     $encontrado = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     if ($encontrado) {
         $_SESSION['usuario'] = $encontrado['nome'];
@@ -46,7 +49,13 @@ if ($acao === 'cadastrar') {
     $preco = $_POST['preco'] ?? '';
     $estoque = $_POST['estoque'] ?? '';
     $categoria = $_POST['categoria'] ?? '';
-    $sql = "INSERT INTO produtos (nome, descricao, preco, estoque, categoria) VALUES ('$nome', '$descricao', '$preco', '$estoque', '$categoria')";
+    $sql = "INSERT INTO produtos (nome, descricao, preco, estoque, categoria) 
+    VALUES (':nome', ':descricao', ':preco', ':estoque', ':categoria')";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute
+    (['nome'=> $nome, 'descricao' => $descricao, 'preco' => $preco, 'estoque' => $estoque, 'categoria' => $categoria]);
+
     $pdo->exec($sql);
     $mensagem = "Produto $nome cadastrado!";
 }
@@ -59,13 +68,22 @@ if ($acao === 'atualizar') {
     $estoque = $_POST['estoque'] ?? '';
     $categoria = $_POST['categoria'] ?? '';
     $sql = "UPDATE produtos SET nome='$nome', descricao='$descricao', preco='$preco', estoque='$estoque', categoria='$categoria' WHERE id=$id";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute
+    (['nome'=> $nome, 'descricao' => $descricao, 'preco' => $preco, 'estoque' => $estoque, 'categoria' => $categoria]);
+
+    
     $pdo->exec($sql);
     $mensagem = 'Produto atualizado.';
 }
 
 if ($acao === 'excluir') {
     $id = $_GET['id'] ?? '';
-    $pdo->exec("DELETE FROM produtos WHERE id=$id");
+    $pdo->exec("DELETE FROM produtos WHERE id=:id");
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['id'=> $id]);
+
     $mensagem = 'Produto excluído.';
 }
 
