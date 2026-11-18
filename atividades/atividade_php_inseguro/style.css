@@ -8,8 +8,8 @@ body {
 }
 
 header {
-    background: #777;
-    color: #999;
+    background: #202020;
+    color: #00ffea;
     padding: 18px;
     width: 1200px
 }
@@ -26,7 +26,7 @@ h1 {
 
 h2 {
     font-size: 18px;
-    color: #aaa
+    color: #ff0000
 }
 
 .painel {
