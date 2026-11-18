@@ -4,12 +4,11 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
 $host = '194.61.238.119';
-$banco = 'daniel755_db1';     // $db = 'daniel755_db1';
-$usuario = 'daniel755';   // $user = 'daniel755';
-$senha = '755!@#';     // $pass = '755!@#';
+$banco = 'daniel755_db1';
+$usuario = 'daniel755';   
+$senha = '755!@#';     
 $host = 'localhost';  
-    
-    // $charset = 'utf8mb4';
+
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$banco;charset=utf8mb4", $usuario, $senha);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -51,6 +50,12 @@ if ($acao === 'cadastrar') {
     $categoria = $_POST['categoria'] ?? '';
     $sql = "INSERT INTO produtos (nome, descricao, preco, estoque, categoria) 
     VALUES (':nome', ':descricao', ':preco', ':estoque', ':categoria')";
+
+    if($nome === '') {exit ('Insira um nome válido!');}
+    if($descricao === '') {exit ('Insira uma descricao válido!');}
+    if($preco === '' || $preco <= 0) {exit ('Insira um preco válido!');}
+    if($estoque === '' || $estoque < 0) {exit ('Insira um estoque válido!');}
+    if($categoria === '') {exit ('Insira uma categoria válido!');}
     
     $stmt = $pdo->prepare($sql);
     $stmt->execute
@@ -62,16 +67,23 @@ if ($acao === 'cadastrar') {
 
 if ($acao === 'atualizar') {
     $id = $_POST['id'] ?? '';
-    $nome = $_POST['nome'] ?? '';
+    $nome = $_POST['nome'] ?? '';  
     $descricao = $_POST['descricao'] ?? '';
     $preco = $_POST['preco'] ?? '';
     $estoque = $_POST['estoque'] ?? '';
     $categoria = $_POST['categoria'] ?? '';
-    $sql = "UPDATE produtos SET nome='$nome', descricao='$descricao', preco='$preco', estoque='$estoque', categoria='$categoria' WHERE id=$id";
+    $sql = "UPDATE produtos SET nome=':nome', descricao=':descricao', preco=':preco', estoque=':estoque', categoria=':categoria' WHERE id=:id";
     
+    if($id === '' || $id < 0) {exit('Insira um id válido!');}
+    if($nome === '') {exit ('Insira um nome válido!');}
+    if($descricao === '') {exit ('Insira uma descricao válido!');}
+    if($preco === '' || $preco <= 0) {exit ('Insira um preco válido!');}
+    if($estoque === '' || $estoque < 0) {exit ('Insira um estoque válido!');}
+    if($categoria === '') {exit ('Insira uma categoria válido!');}
+
     $stmt = $pdo->prepare($sql);
     $stmt->execute
-    (['nome'=> $nome, 'descricao' => $descricao, 'preco' => $preco, 'estoque' => $estoque, 'categoria' => $categoria]);
+    (['nome'=> $nome, 'descricao' => $descricao, 'preco' => $preco, 'estoque' => $estoque, 'categoria' => $categoria, 'id'=>$id]);
 
     
     $pdo->exec($sql);
@@ -81,8 +93,10 @@ if ($acao === 'atualizar') {
 if ($acao === 'excluir') {
     $id = $_GET['id'] ?? '';
     $pdo->exec("DELETE FROM produtos WHERE id=:id");
-    $stmt = $pdo->prepare($sql);
+
     $stmt->execute(['id'=> $id]);
+
+    if($id === '' || $id < 0) {exit('Insira um id válido!');}
 
     $mensagem = 'Produto excluído.';
 }
