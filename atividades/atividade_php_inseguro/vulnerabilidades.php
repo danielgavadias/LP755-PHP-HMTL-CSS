@@ -31,9 +31,9 @@ if ($acao === 'login') {
     if ($encontrado) {
         $_SESSION['usuario'] = $encontrado['nome'];
         $_SESSION['perfil'] = $encontrado['perfil'];
-        $mensagem = 'Bem-vindo, ' . $encontrado['nome'];
+        $mensagem = 'Bem-vindo, ' . htmlspecialchars($encontrado['nome']);
     } else {
-        $mensagem = 'Login inválido para ' . $email;
+        $mensagem = 'Login inválido para ' . htmlspecialchars($email);
     }
 }
 
@@ -57,7 +57,7 @@ if ($acao === 'cadastrar') {
     (['nome'=> $nome, 'descricao' => $descricao, 'preco' => $preco, 'estoque' => $estoque, 'categoria' => $categoria]);
 
     $pdo->exec($sql);
-    $mensagem = "Produto $nome cadastrado!";
+    $mensagem = "Produto " . htmlspecialchars($nome) . " cadastrado!";
 }
 
 if ($acao === 'atualizar') {
