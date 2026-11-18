@@ -1,8 +1,8 @@
 /* CSS propositalmente problemático: identificar falhas de legibilidade, foco, responsividade e manutenção. */
 body {
     margin: 0;
-    background: #dedede;
-    color: #aaa;
+    background: #2f2f2f;
+    color: #ffffff;
     font-family: Arial, sans-serif;
     font-size: 12px
 }
@@ -11,7 +11,7 @@ header {
     background: #777;
     color: #999;
     padding: 18px;
-    width: 12000px
+    width: 1200px
 }
 
 main {
