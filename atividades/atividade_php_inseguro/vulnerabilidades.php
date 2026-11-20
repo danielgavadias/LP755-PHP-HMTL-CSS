@@ -1,7 +1,11 @@
 <?php
-// Objetivo: localizar, explicar e corrigir vulnerabilidades.
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
+// Display_errors, 0 = não exibe o erro interno para qualquer usuário
+ini_set('log_errors', '1');
+// Display_errors, 1 = registra ps logs num arquivo interno o qual o usuário padrão não possui acesso
 error_reporting(E_ALL);
+// error_reporting = define quais tipos de erro o php deve registrar
+//E_ALL = TODOS os error
 session_start();
 $host = '194.61.238.119';
 $banco = 'daniel755_db1';
@@ -14,7 +18,9 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
 
-    die('Falha no banco: ' . $e->getMessage());
+    error_log('Falha no banco: ' . $e->getMessage());
+    http_response_code(500);
+    exit('Erro interno de conexão')
 }
 $mensagem = $_GET['msg'] ?? '';
 $acao = $_POST['acao'] ?? $_GET['acao'] ?? '';
@@ -23,6 +29,7 @@ if ($acao === 'login') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['senha'] ?? '';
     $sql = "SELECT * FROM usuarios WHERE email = ':email' AND senha = ':password'";
+    
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['email'=> $email, 'password' => $password]);
 
