@@ -111,9 +111,11 @@ if ($acao === 'excluir') {
 $busca = $_GET['busca'] ?? '';
 $categoriaFiltro = $_GET['categoria'] ?? '';
 $ordem = $_GET['ordem'] ?? 'id';
-$sqlLista = "SELECT * FROM produtos WHERE (nome LIKE '%$busca%' OR descricao LIKE '%$busca%')";
+$sqlLista = "SELECT * FROM produtos WHERE (nome LIKE 'buscaNome' OR descricao LIKE ':buscaDescricao')";
+$parametros = ['buscaNome' => "%$busca%", 'buscaDescricao' => "%$busca%"];
 
-if ($categoriaFiltro !== '') {
+if ($categoriaFiltro !== '') 
+{
     $sqlLista .= " AND categoria = '$categoriaFiltro'";
 }
 
@@ -125,6 +127,12 @@ if (isset($_GET['editar'])) {
     $editar = $pdo->query('SELECT * FROM produtos WHERE id=' . $_GET['editar'])->fetch(PDO::FETCH_ASSOC);
 }
 $total = $pdo->query('SELECT COUNT(*) FROM produtos')->fetchColumn();
+
+function escapar($valor)
+{
+    return htmlspecialchars($valor. ENT_QUOTES, 'UTF-8');
+    //ENT_QUOTES = É uma ocnstante
+}
 
 ?>
 <!DOCTYPE html>
